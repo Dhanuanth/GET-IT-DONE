@@ -302,6 +302,17 @@ body {
 
 .form-row label {
   flex: 1;
+  min-width: 0;
+}
+
+.form-row input {
+  width: 100%;
+}
+
+@media (max-width: 480px) {
+  .form-row {
+    flex-direction: column;
+  }
 }
 
 .form-actions {

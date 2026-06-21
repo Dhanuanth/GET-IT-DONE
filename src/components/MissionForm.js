@@ -64,7 +64,7 @@ export default function MissionForm({ onCreate, onCancel }) {
       </div>
       <div className="form-actions">
         <button type="submit" className="btn-outline">
-          Create mission
+          CREATE
         </button>
         <button type="button" className="btn-link" onClick={onCancel}>
           Cancel
