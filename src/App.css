@@ -1,0 +1,380 @@
+:root {
+  --bg: #0a0a0a;
+  --surface: #131313;
+  --fg: #f5f5f5;
+  --muted: #8a8a8a;
+  --border: #2c2c2c;
+  --border-strong: #444;
+  --accent: #f5f5f5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+}
+
+.app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 20px 100px;
+  color: var(--fg);
+  background: var(--bg);
+  min-height: 100vh;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 20px;
+  margin-bottom: 28px;
+}
+
+.app-header h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
+  margin: 0;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.tabs {
+  display: flex;
+  gap: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  padding: 3px;
+}
+
+.tab {
+  font-family: 'Orbitron', sans-serif;
+  background: none;
+  border: none;
+  color: var(--muted);
+  padding: 7px 16px;
+  font-size: 0.85rem;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.tab.active {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.tab:not(.active):hover {
+  color: var(--fg);
+}
+
+.empty-state {
+  color: var(--muted);
+  text-align: center;
+  padding: 50px 0;
+  font-size: 0.95rem;
+}
+
+.mission-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.mission-card {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 0;
+  padding: 20px 22px;
+  transition: border-color 0.15s;
+}
+
+.mission-card:hover {
+  border-color: var(--border-strong);
+}
+
+.mission-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.mission-header h3 {
+  font-family: 'Orbitron', sans-serif;
+  margin: 0 0 4px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.mission-desc {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.mission-meta {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin: 14px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 0;
+}
+
+.checklist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.day-check {
+  font-family: 'Orbitron', sans-serif;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border-strong);
+  background: transparent;
+  color: var(--fg);
+  font-size: 0.72rem;
+  border-radius: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+
+.day-check:not(:disabled):hover {
+  border-color: var(--fg);
+}
+
+.day-check.checked {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+}
+
+.day-check.future {
+  border-style: dashed;
+  color: var(--border);
+  border-color: var(--border);
+  cursor: not-allowed;
+}
+
+.day-check:disabled {
+  cursor: not-allowed;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--muted);
+  padding: 0 4px;
+}
+
+.btn-icon:hover {
+  color: var(--fg);
+}
+
+/* .btn-solid {
+  background: var(--fg);
+  color: var(--bg);
+  border: 1px solid var(--fg);
+  border-radius: 0;
+  padding: 11px 18px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s;
+} */
+
+.btn-solid:hover {
+  opacity: 0.85;
+}
+
+.btn-text {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.7);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-outline {
+  font-family: 'Orbitron', sans-serif;
+  width: 100%;
+  height: 52px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 0;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-outline:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.btn-outline:active {
+  transform: scale(0.99);
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  cursor: pointer;
+}
+
+.btn-link:hover {
+  color: var(--fg);
+}
+
+
+.new-mission-btn {
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.mission-form {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 0;
+  padding: 22px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mission-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.mission-form input,
+.mission-form textarea {
+  border: 1px solid var(--border-strong);
+  border-radius: 0;
+  padding: 9px 11px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.mission-form input::placeholder,
+.mission-form textarea::placeholder {
+  color: #555;
+}
+
+.mission-form input:focus,
+.mission-form textarea:focus {
+  outline: none;
+  border-color: var(--fg);
+}
+
+.form-row {
+  display: flex;
+  gap: 14px;
+}
+
+.form-row label {
+  flex: 1;
+}
+
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.mission-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 14px;
+}
+
+.status-badge {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 4px 10px;
+  border-radius: 0;
+  border: 1px solid var(--border-strong);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.status-badge.completed {
+  color: var(--fg);
+  border-color: var(--fg);
+}
+
+.status-badge.cancelled {
+  color: #888;
+  border-color: var(--border);
+}
+
+.history-result {
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.reflection {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.reflection label {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.reflection textarea {
+  border: 1px solid var(--border);
+  border-radius: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: inherit;
+  font-size: 0.88rem;
+  padding: 9px 11px;
+  resize: vertical;
+}
+
+.reflection textarea::placeholder {
+  color: #555;
+}
+
+.reflection textarea:focus {
+  outline: none;
+  border-color: var(--border-strong);
+}
+
+.reflection .btn-link {
+  align-self: flex-end;
+}
