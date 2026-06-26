@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   completedCount,
   dayDateForIndex,
@@ -6,9 +7,16 @@ import {
   todayStr,
 } from "../utils/missions";
 
+const COLLAPSED_DAY_LIMIT = 14;
+
 export default function MissionCard({ mission, onToggleDay, onDelete, onCancel, finished }) {
+  const [expanded, setExpanded] = useState(false);
   const done = completedCount(mission);
   const today = todayStr();
+  const canCollapse = mission.checks.length > COLLAPSED_DAY_LIMIT;
+  const visibleChecks = expanded || !canCollapse
+    ? mission.checks
+    : mission.checks.slice(0, COLLAPSED_DAY_LIMIT);
 
   function handleCancelClick() {
     if (window.confirm("Cancel this mission? It will move to History.")) {
@@ -45,8 +53,8 @@ export default function MissionCard({ mission, onToggleDay, onDelete, onCancel, 
         </span>
       </div>
 
-      <div className="checklist">
-        {mission.checks.map((checked, i) => {
+      <div className={`checklist ${expanded ? "expanded" : ""}`}>
+        {visibleChecks.map((checked, i) => {
           const dayDate = dayDateForIndex(mission, i);
           const dayDateStr = dayDate.toISOString().slice(0, 10);
           const isFuture = dayDateStr > today;
@@ -63,6 +71,12 @@ export default function MissionCard({ mission, onToggleDay, onDelete, onCancel, 
           );
         })}
       </div>
+
+      {canCollapse && (
+        <button className="btn-link checklist-toggle" onClick={() => setExpanded((e) => !e)}>
+          {expanded ? "Show less" : `Show all ${mission.checks.length} days`}
+        </button>
+      )}
 
       <div className="mission-footer">
         <button className="btn-link" onClick={handleCancelClick}>
