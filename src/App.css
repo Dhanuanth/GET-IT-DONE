@@ -34,6 +34,13 @@ body {
   margin-bottom: 28px;
 }
 
+.app-date {
+  margin: 3px 0 0;
+  font-size: 0.75rem;
+  color: var(--muted);
+  letter-spacing: 0.03em;
+}
+
 .app-header h1 {
   font-family: 'Orbitron', sans-serif;
   font-size: 1.4rem;

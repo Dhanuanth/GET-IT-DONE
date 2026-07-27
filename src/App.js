@@ -3,7 +3,7 @@ import "./App.css";
 import MissionForm from "./components/MissionForm";
 import MissionCard from "./components/MissionCard";
 import HistoryCard from "./components/HistoryCard";
-import { getStatus, loadMissions, saveMissions } from "./utils/missions";
+import { formatDate, getStatus, loadMissions, saveMissions } from "./utils/missions";
 
 function App() {
   const [missions, setMissions] = useState(() => loadMissions());
@@ -67,7 +67,10 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>Get It Done</h1>
+        <div>
+          <h1>Get It Done</h1>
+          <p className="app-date">{formatDate(new Date())}</p>
+        </div>
         <nav className="tabs">
           <button
             className={tab === "active" ? "tab active" : "tab"}
