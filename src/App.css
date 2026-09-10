@@ -110,6 +110,7 @@ body {
   justify-content: space-between;
   align-items: flex-start;
   gap: 12px;
+  padding: 10px 00px;
 }
 
 .mission-header h3 {
@@ -121,41 +122,62 @@ body {
 }
 
 .mission-desc {
-  margin: 0;
+  margin: 4px 0 0;
   color: var(--muted);
   font-size: 0.85rem;
   line-height: 1.4;
 }
 
+.mission-field-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 5px;
+}
+
+.mission-detail-field {
+  margin-top: 12px;
+}
+
+.mission-detail-box {
+  /* border: 0.5px solid var(--border-strong); */
+  /* background: var(--bg); */
+  color: var(--fg);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  padding: 9px 11px;
+  white-space: pre-wrap;
+}
+
+.color-counts { font-variant-numeric: tabular-nums; }
+.count-red    { color: rgba(239, 68, 68, 0.9); }
+.count-yellow { color: rgba(234, 179, 8, 0.95); }
+.count-green  { color: rgba(34, 197, 94, 0.9); }
+
 .mission-meta {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 6px;
-  font-size: 0.78rem;
+  gap: 1px;
+  font-size: 0.68rem;
   color: var(--muted);
-  margin: 14px 0;
-  border-top: 1px solid var(--border);
+  margin: 5px 0;
+  /* border-top: 1px solid var(--border); */
   border-bottom: 1px solid var(--border);
-  padding: 10px 0;
+  padding: 5px 0px;
 }
 
-.checklist {
+.mission {
   display: flex;
   flex-wrap: wrap;
   gap: 7px;
-  max-height: 71px;
-  overflow: hidden;
+  padding: 8px 0 4px;
 }
 
-.checklist.expanded {
-  max-height: none;
-}
-
-.checklist-toggle {
-  display: inline-block;
-  margin-top: 8px;
-  font-size: 0.78rem;
+.day-check-wrap {
+  position: relative;
 }
 
 .day-check {
@@ -178,10 +200,103 @@ body {
   border-color: var(--fg);
 }
 
-.day-check.checked {
-  background: var(--fg);
-  color: var(--bg);
-  border-color: var(--fg);
+.day-check.color-red    { background: rgba(239, 68, 68, 0.25);  border-color: rgba(239, 68, 68, 0.6); }
+.day-check.color-yellow { background: rgba(234, 179, 8, 0.22);  border-color: rgba(234, 179, 8, 0.6); }
+.day-check.color-green  { background: rgba(34, 197, 94, 0.22);  border-color: rgba(34, 197, 94, 0.6); }
+
+.color-opt {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.1s, border-color 0.1s;
+}
+
+.color-opt:hover { transform: scale(1.15); }
+.color-opt.selected { border-color: var(--fg); }
+
+.color-opt.red    { background: rgba(239, 68, 68, 0.85); }
+.color-opt.yellow { background: rgba(234, 179, 8, 0.9); }
+.color-opt.green  { background: rgba(34, 197, 94, 0.85); }
+
+.day-journal-tooltip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  color: var(--fg);
+  font-size: 0.78rem;
+  line-height: 1.4;
+  padding: 7px 10px;
+  white-space: pre-wrap;
+  width: 180px;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal {
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  padding: 24px;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-day-label {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.modal-colors {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.modal-journal {
+  border: 1px solid var(--border-strong);
+  background: var(--bg);
+  color: var(--fg);
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 9px 11px;
+  resize: vertical;
+  border-radius: 0;
+}
+
+.modal-journal::placeholder { color: #555; }
+.modal-journal:focus { outline: none; border-color: var(--fg); }
+
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-submit {
+  width: 100%;
+  height: 44px;
 }
 
 .day-check.future {

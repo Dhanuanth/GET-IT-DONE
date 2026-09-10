@@ -31,14 +31,11 @@ function App() {
     setShowForm(false);
   }
 
-  function handleToggleDay(id, index) {
+  function handleToggleDay(id, index, color) {
     setMissions((prev) =>
       prev.map((m) =>
         m.id === id
-          ? {
-              ...m,
-              checks: m.checks.map((c, i) => (i === index ? !c : c)),
-            }
+          ? { ...m, checks: m.checks.map((c, i) => (i === index ? color : c)) }
           : m
       )
     );

@@ -22,7 +22,9 @@ export default function HistoryCard({ mission, onReflectionChange, onDelete }) {
       <div className="mission-header">
         <div>
           <h3>{mission.name}</h3>
-          {mission.description && <p className="mission-desc">{mission.description}</p>}
+          {mission.rules && <p className="mission-desc"><span className="mission-field-label">Rules</span>{mission.rules}</p>}
+          {mission.rewards && <p className="mission-desc"><span className="mission-field-label">Rewards</span>{mission.rewards}</p>}
+          {mission.penalties && <p className="mission-desc"><span className="mission-field-label">Penalties</span>{mission.penalties}</p>}
         </div>
         <span className={`status-badge ${status}`}>
           {status === "completed" ? "Completed" : "Cancelled"}

@@ -1,11 +1,41 @@
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { todayStr } from "../utils/missions";
+
+function useBulletField() {
+  const [value, setValue] = useState("• ");
+  const ref = useRef(null);
+  const nextCursor = useRef(null);
+
+  useLayoutEffect(() => {
+    if (nextCursor.current !== null && ref.current) {
+      ref.current.setSelectionRange(nextCursor.current, nextCursor.current);
+      nextCursor.current = null;
+    }
+  });
+
+  function onKeyDown(e) {
+    if (e.key !== "Enter") return;
+    e.preventDefault();
+    const { selectionStart, selectionEnd, value: v } = e.target;
+    const newVal = v.slice(0, selectionStart) + "\n• " + v.slice(selectionEnd);
+    nextCursor.current = selectionStart + 3;
+    setValue(newVal);
+  }
+
+  function onChange(e) {
+    setValue(e.target.value);
+  }
+
+  return { value, ref, onKeyDown, onChange };
+}
 
 export default function MissionForm({ onCreate, onCancel }) {
   const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
   const [totalDays, setTotalDays] = useState(7);
   const [startDate, setStartDate] = useState(todayStr());
+  const rules = useBulletField();
+  const rewards = useBulletField();
+  const penalties = useBulletField();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -13,7 +43,9 @@ export default function MissionForm({ onCreate, onCancel }) {
     onCreate({
       id: crypto.randomUUID(),
       name: name.trim(),
-      description: description.trim(),
+      rules: rules.value.trim(),
+      rewards: rewards.value.trim(),
+      penalties: penalties.value.trim(),
       totalDays: Number(totalDays),
       startDate,
       checks: Array(Number(totalDays)).fill(false),
@@ -33,12 +65,36 @@ export default function MissionForm({ onCreate, onCancel }) {
         />
       </label>
       <label>
-        DESCRIPTION
+        RULES
         <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder="Optional details"
+          ref={rules.ref}
+          value={rules.value}
+          onChange={rules.onChange}
+          onKeyDown={rules.onKeyDown}
           rows={3}
+          required
+        />
+      </label>
+      <label>
+        REWARDS
+        <textarea
+          ref={rewards.ref}
+          value={rewards.value}
+          onChange={rewards.onChange}
+          onKeyDown={rewards.onKeyDown}
+          rows={3}
+          required
+        />
+      </label>
+      <label>
+        PENALTIES
+        <textarea
+          ref={penalties.ref}
+          value={penalties.value}
+          onChange={penalties.onChange}
+          onKeyDown={penalties.onKeyDown}
+          rows={3}
+          required
         />
       </label>
       <div className="form-row">

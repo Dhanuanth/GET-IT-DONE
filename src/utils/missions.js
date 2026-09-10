@@ -35,7 +35,7 @@ export function todayStr() {
 }
 
 // Mission shape:
-// { id, name, description, totalDays, startDate, checks: [bool, ...],
+// { id, name, rules, rewards, penalties, totalDays, startDate, checks: [bool, ...],
 //   status: "active" | "cancelled", cancelledOn, reflection }
 
 export function getEndDate(mission) {
